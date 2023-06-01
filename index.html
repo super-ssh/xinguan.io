@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新冠调查</title>
+    <script src="echarts@5.4.2_dist_echarts.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'icomoon';
+            src: url('fonts/icomoon.eot?7kkyc2');
+            src: url('fonts/icomoon.eot?7kkyc2#iefix') format('embedded-opentype'),
+                url('fonts/icomoon.ttf?7kkyc2') format('truetype'),
+                url('fonts/icomoon.woff?7kkyc2') format('woff'),
+                url('fonts/icomoon.svg?7kkyc2#icomoon') format('svg');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .one {
+            margin-top: 10px;
+            padding: 20px;
+            height: 260px;
+        }
+
+        .one .onequ {
+            width: 50%;
+            float: left;
+            margin-top: 100px;
+        }
+
+        .one #onemain,
+        #twomain,
+        #thrmain,
+        #fourmain,
+        #fivemain,
+        #sixmain,
+        #sevenmain {
+            float: left;
+            width: 300px;
+            height: 300px;
+        }
+
+        #sum {
+            height: 370px;
+        }
+
+        .one .onequ p {
+            font-size: 14px;
+        }
+
+        .one .onequ .text {
+            display: inline-block;
+        }
+
+        .texthead,
+        .oneyes {
+            font-family: 'icomoon';
+            color: pink;
+            margin-right: 5px;
+        }
+
+        .onequitem {
+            padding-left: 10px;
+        }
+
+        .onequitem p {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h2>大学生对新冠疫情解封后大学生活变化的调查研究</h2>
+    </div>
+    <div class="one">
+        <div class="onequ">
+            <p class="text"><span class="texthead"></span>新冠疫情结束后,你是否更加注重自身健康和卫生</p>
+            <div class="onequitem">
+                <span class="oneyes"></span>
+                <p>是</p>
+            </div>
+            <div class="onequitem">
+                <span class="oneyes"></span>
+                <p>否</p>
+            </div>
+        </div>
+        <div id="onemain"></div>
+    </div>
+    <div class="one">
+        <div class="onequ">
+            <p class="text"><span class="texthead"></span>在新冠疫情期间,你是否对线上教育和远程教育有了更深刻的影响</p>
+            <div class="onequitem">
+                <span class="oneyes"></span>
+                <p>是</p>
+            </div>
+            <div class="onequitem">
+                <span class="oneyes"></span>
+                <p>否</p>
+            </div>
+        </div>
+        <div id="twomain"></div>
+    </div>
+    <div class="one">
+        <div class="onequ">
+            <p class="text"><span class="texthead"></span>在新冠疫情期间,你是否对线上教育和远程教育有了更深刻的影响</p>
+            <div class="onequitem">
+                <span class="oneyes"></span>
+                <p>是</p>
+            </div>
+            <div class="onequitem">
+                <span class="oneyes"></span>
+                <p>否</p>
+            </div>
+        </div>
+        <div id="thrmain"></div>
+    </div>
+    <div class="one">
+        <div class="onequ">
+            <p class="text"><span class="texthead"></span>解封后,你是否会积极参加社交活动或组织活动</p>
+            <div class="onequitem">
+                <span class="oneyes"></span>
+                <p>是</p>
+            </div>
+            <div class="onequitem">
+                <span class="oneyes"></span>
+                <p>否</p>
+            </div>
+        </div>
+        <div id="fourmain"></div>
+    </div>
+    <div class="one">
+        <div class="onequ">
+            <p class="text"><span class="texthead"></span>经过疫情,你是否更加珍惜生命,乐观面对生活</p>
+            <div class="onequitem">
+                <span class="oneyes"></span>
+                <p>是</p>
+            </div>
+            <div class="onequitem">
+                <span class="oneyes"></span>
+                <p>否</p>
+            </div>
+        </div>
+        <div id="fivemain"></div>
+    </div>
+    <div class="one">
+        <div class="onequ">
+            <p class="text"><span class="texthead"></span>你是否觉得疫情让人们更加关注公共卫生和社会责任</p>
+            <div class="onequitem">
+                <span class="oneyes"></span>
+                <p>是</p>
+            </div>
+            <div class="onequitem">
+                <span class="oneyes"></span>
+                <p>否</p>
+            </div>
+        </div>
+        <div id="sixmain"></div>
+    </div>
+    <div class="one">
+        <div class="onequ">
+            <p class="text"><span class="texthead"></span>疫情结束后,你是否愿意去其他国家旅游或留学</p>
+            <div class="onequitem">
+                <span class="oneyes"></span>
+                <p>是</p>
+            </div>
+            <div class="onequitem">
+                <span class="oneyes"></span>
+                <p>否</p>
+            </div>
+        </div>
+        <div id="sevenmain"></div>
+    </div>
+    <div id="sum"></div>
+</body>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('onemain'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            top: '2%',
+            left: 'center'
+        },
+        series: [
+            {
+                name: '第一题',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: 40,
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: 292, name: '是' },
+                    { value: 12, name: '否' },
+                ]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+</script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('twomain'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            top: '2%',
+            left: 'center'
+        },
+        series: [
+            {
+                name: '第二题',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: 40,
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: 273, name: '是' },
+                    { value: 31, name: '否' },
+                ]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('thrmain'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            top: '2%',
+            left: 'center'
+        },
+        series: [
+            {
+                name: '第三题',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: 40,
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: 248, name: '是' },
+                    { value: 56, name: '否' },
+                ]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('fourmain'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            top: '2%',
+            left: 'center'
+        },
+        series: [
+            {
+                name: '第四题',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: 40,
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: 171, name: '是' },
+                    { value: 133, name: '否' },
+                ]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('fivemain'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            top: '2%',
+            left: 'center'
+        },
+        series: [
+            {
+                name: '第五题',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: 40,
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: 289, name: '是' },
+                    { value: 15, name: '否' },
+                ]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('sixmain'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            top: '2%',
+            left: 'center'
+        },
+        series: [
+            {
+                name: '第六题',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: 40,
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: 290, name: '是' },
+                    { value: 14, name: '否' },
+                ]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('sevenmain'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            top: '2%',
+            left: 'center'
+        },
+        series: [
+            {
+                name: '第七题',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: 40,
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: 120, name: '是' },
+                    { value: 184, name: '否' },
+                ]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+<script>
+    var chartDom = document.getElementById('sum');
+    var myChart = echarts.init(chartDom);
+    var option;
+    option = {
+        xAxis: {
+            type: 'category',
+            data: ['自身卫生', '教育', '外国旅游', '社会就业']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                data: [290, 270, 120, 248],
+                type: 'bar',
+                showBackground: true,
+                backgroundStyle: {
+                    color: 'rgba(180, 180, 180, 0.2)'
+                }
+            }
+        ]
+    };
+
+    option && myChart.setOption(option);
+</script>
+
+</html>
